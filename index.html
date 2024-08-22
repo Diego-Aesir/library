@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <dialog>
@@ -17,10 +18,13 @@
             <input id="author" type="text">
 
             <label for="pages"> How many pages: </label>
-            <input id="pages" type="text">
+            <input id="pages" type="number">
 
             <label for="readed"> Did you alread readed it: </label>
-            <input id="readed" type="text">
+            <select id="readed"> 
+                <option value="Readed"> Readed </option>
+                <option value="Not Readed"> Not Readed </option>
+            </select>
         </form>
         <button id="sendForm"> Add my new book </button>
     </dialog>

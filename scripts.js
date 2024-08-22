@@ -22,8 +22,30 @@ function Book(title, author, pages, readed) {
 
 function addTableItem(book) {
     let tr = document.createElement("tr");
+    let btn_delete = document.createElement("button");
+    let btn_change_read_status = document.createElement("button");
+
+    btn_delete.innerText = "Delete Book";
+    btn_change_read_status.innerText = "Change Read Status";
+    
     tr.innerHTML = book.info();
+
     table.appendChild(tr);
+    tr.appendChild(btn_change_read_status);
+    tr.appendChild(btn_delete);
+
+    btn_change_read_status.addEventListener("click", () => {
+        book.readed = book.readed === "Readed" ? "Not Readed" : "Readed";
+        tr.innerHTML = book.info();
+        tr.appendChild(btn_change_read_status);
+        tr.appendChild(btn_delete);
+    });
+
+    btn_delete.addEventListener("click", () => {
+        table.removeChild(tr);
+        let position = myLibrary.indexOf(book);
+        myLibrary.splice(position,1);
+    });
 }
 
 function openDialog() {
@@ -34,7 +56,7 @@ function isEmpty(txtInput, inputName) {
     if(txtInput.value === "" || txtInput.value === null) {
         window.alert("There are some missing information on " + inputName + " !");
         return false;
-    }
+    } else return true;
 }
 
 function checkAllInputs() {
@@ -49,7 +71,7 @@ function checkAllInputs() {
 }
 
 function getDialogInfo() {
-    if(!checkAllInputs()) {
+    if(checkAllInputs()) {
         dialog.close();
         addBookToLibrary();
     }
@@ -62,5 +84,3 @@ function addBookToLibrary() {
 
 btn.addEventListener("click", openDialog);
 sendForm.addEventListener("click", getDialogInfo);
-
-
